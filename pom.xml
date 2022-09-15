@@ -12,6 +12,8 @@
 	<artifactId>correlationid</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>correlationid</name>
+
+	<packaging>war</packaging>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>17</java.version>
@@ -58,7 +60,42 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-
+	<profiles>
+		<profile>
+			<id>dev</id>
+			
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<spring.profiles.active>dev</spring.profiles.active>
+			</properties>
+		</profile>
+		<profile>
+			<id>prod</id> 
+			 <dependencies>
+				<dependency>
+					<groupId>javax.servlet</groupId>
+					<artifactId>javax.servlet-api</artifactId>
+					<version>3.1.0</version>
+					<scope>provided</scope>
+				</dependency>
+				<dependency>
+					<groupId>com.vaadin</groupId>
+					<artifactId>vaadin-spring-boot-starter</artifactId>
+					<exclusions> 
+						<exclusion>
+							<groupId>org.springframework.boot</groupId>
+							<artifactId>spring-boot-starter-tomcat</artifactId>
+						</exclusion>
+					</exclusions>
+				</dependency>
+			 </dependencies>
+			<properties>
+				<spring.profiles.active>prod</spring.profiles.active>
+			</properties>
+		</profile> 
+	</profiles>
 	<build>
 		<plugins>
 			<plugin>

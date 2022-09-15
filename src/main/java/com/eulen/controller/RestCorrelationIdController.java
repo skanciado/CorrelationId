@@ -16,18 +16,23 @@ public class RestCorrelationIdController {
     ILogger log = LoggerLog4J.getLogger(RestCorrelationIdController.class);
     @GetMapping("/correlationId")
     String correlationId() {
-        log.info("/correlationId");
+        log.debug("/correlationId");
         return "CorrelationId: " + CorrelationIdStore.getCurrentId();
     }
     @GetMapping("/send")
     String send(@RequestParam String url) {
-        log.info("/send?url=" + url); 
-        // WebClient client = WebClient.create();
-        // String responseBody = client.get()
-        //     .uri(url).header(CorrelationIdFilter.HTTP_CORRELATION_ID_HEADER, CorrelationIdStore.getCurrentId())
-        //     .retrieve().bodyToMono(String.class).block();
-
-     
+        log.debug("/send?url=" + url); 
         return "Body Request: " + WebClient.sendHttp(url);
     }
+    // Create a get request to the url and return the response bodyToMono object
+     @GetMapping("/send2")
+     String send2(@RequestParam String url) {
+         log.debug("/send?url=" + url);
+         org.springframework.web.reactive.function.client.WebClient client = org.springframework.web.reactive.function.client.WebClient.create();
+         String responseBody = client.get()
+             .uri(url).header(CorrelationIdFilter.HTTP_CORRELATION_ID_HEADER, CorrelationIdStore.getCurrentId())
+             .retrieve().bodyToMono(String.class).block();
+         return "Body Request: " + responseBody;
+     }
+
 }

@@ -1,5 +1,6 @@
 package com.eulen.correlationid;
 
+import org.slf4j.MDC;
 import org.springframework.stereotype.Component;
 
 import com.eulen.logger.ILogger;
@@ -14,8 +15,7 @@ import jakarta.servlet.FilterConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
-import jakarta.servlet.http.HttpServletRequest;
- 
+import jakarta.servlet.http.HttpServletRequest; ;
 
 @Component
 public class CorrelationIdFilter implements Filter {
@@ -35,6 +35,7 @@ public class CorrelationIdFilter implements Filter {
       }else {
          CorrelationIdStore.newRequest();
       } 
+      MDC.put("correlationId", CorrelationIdStore.getCurrentId());
       log.info("Filter");
       /*System.out.println("Remote Host:"+request.getRemoteHost());
       System.out.println("Remote Address:"+request.getRemoteAddr());*/
