@@ -11,7 +11,19 @@ public class CorrelationIdToken   {
    private String correlationId;
 
 
-   public CorrelationIdToken() { 
+   public long getCreation() {
+	return creation;
+}
+public void setCreation(long creation) {
+	this.creation = creation;
+}
+public String getCorrelationId() {
+	return correlationId;
+}
+public void setCorrelationId(String correlationId) {
+	this.correlationId = correlationId;
+}
+public CorrelationIdToken() { 
       this.creation = System.currentTimeMillis(); 
       this.correlationId = UUID.randomUUID().toString();; 
    }
