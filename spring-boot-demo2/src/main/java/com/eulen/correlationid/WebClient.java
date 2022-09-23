@@ -1,8 +1,7 @@
-package com.eulen.core.spring.utils;
+package com.eulen.correlationid;
 
 import org.slf4j.MDC;
 
-import com.eulen.core.filter.EulenRequestIdLocalFilter;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
@@ -13,6 +12,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
  *
  */
 public class WebClient {
+
 	/**
 	 * Envia una peticion HTTP
 	 * 
@@ -22,10 +22,8 @@ public class WebClient {
 	public static String sendHttp(String url) {
 		org.springframework.web.reactive.function.client.WebClient client = org.springframework.web.reactive.function.client.WebClient
 				.create();
-		String responseBody = client.get().uri(url)
-				.header(EulenRequestIdLocalFilter.CORRELATION_ID_FIELD_NAME,
-						MDC.get(EulenRequestIdLocalFilter.CORRELATION_ID_FIELD_NAME))
-				.retrieve().bodyToMono(String.class).block();
+		String responseBody = client.get().uri(url).header("X-Correlation-Id", MDC.get("X-Correlation-Id")).retrieve()
+				.bodyToMono(String.class).block();
 		return responseBody;
 	}
 
@@ -43,11 +41,10 @@ public class WebClient {
 			throws JsonMappingException, JsonProcessingException {
 		org.springframework.web.reactive.function.client.WebClient client = org.springframework.web.reactive.function.client.WebClient
 				.create();
-		T responseBody = client.get().uri(url)
-				.header(EulenRequestIdLocalFilter.CORRELATION_ID_FIELD_NAME,
-						MDC.get(EulenRequestIdLocalFilter.CORRELATION_ID_FIELD_NAME))
-				.retrieve().bodyToMono(clazz).block();
+		T responseBody = client.get().uri(url).header("X-Correlation-Id", MDC.get("X-Correlation-Id")).retrieve()
+				.bodyToMono(clazz).block();
 
 		return responseBody;
 	}
+
 }

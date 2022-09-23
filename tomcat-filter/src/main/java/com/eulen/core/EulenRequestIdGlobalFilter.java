@@ -64,6 +64,7 @@ public class EulenRequestIdGlobalFilter extends ValveBase {
 		MDC.put(CORRELATION_ID_FIELD_NAME, correlationId);
 		logger.info("MDCAdapter Instance: " + MDC.getMDCAdapter().toString());
 		correlationIdStore.set(correlationId);
+		// Setear atributos en la peticion
 		request.setAttribute(CORRELATION_ID_FIELD_NAME, correlationId);
 		request.setAttribute(CONTADOR_FIELD, Contador);
 		request.setAttribute(CORRELATION_ID_BY_FIELD_NAME, String.format("%s-%s",

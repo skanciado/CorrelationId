@@ -1,0 +1,24 @@
+<configuration debug="true">
+      <appender name="CONSOLE" class="com.eulen.core.appender.logback.EulenAppender">
+        <encoder>
+            <pattern>>Base2_%d{yyyy-MM-dd HH:mm:ss.SSS}  [%thread]  CorrelationID:%X{X-Correlation-Id} %level %logger %method: %msg%n</pattern>
+        </encoder>
+    </appender>
+    
+     <!--<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>Base_%d{yyyy-MM-dd HH:mm:ss.SSS}  [%thread]  CorrelationID:%X{X-Correlation-Id} %level %logger %method: %msg%n</pattern>
+        </encoder>
+    </appender>-->
+
+    <!-- default level -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+    
+    <logger name="com.eulen.controller" level="DEBUG"/>
+    <logger name="org.apache.catalina" level="INFO"/>
+    <logger name="org.apache.coyote" level="INFO"/>
+    <logger name="org.apache.tomcat" level="INFO"/>
+    <logger name="org.apache.jasper" level="INFO"/>
+</configuration>
