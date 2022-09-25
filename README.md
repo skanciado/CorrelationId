@@ -1,9 +1,9 @@
  
 ## Table of Contents
-1. [Infomación General](#Infomación General)
+1. [Infomación General](#Infomación-General)
 2. [Requisitos](#Requisitos)
-3. [Estructura de proyecto](#Estructura de proyecto)
-4. [Configuración Tomcat](#Configuracion Tomcat)
+3. [Estructura de proyecto](#Estructura-de-proyecto)
+4. [Configuración Tomcat](#Configuracion-Tomcat)
 5. [Colavoración](#Colavoración)
   
 
